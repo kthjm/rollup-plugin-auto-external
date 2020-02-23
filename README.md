@@ -90,3 +90,7 @@ Rollup will complain if `builtins` is present, and the build target is a browser
 #### `peerDependencies`
 
 `boolean`: defaults to `true`.
+
+#### `bundledDependencies`
+
+`boolean`: defaults to `false`.

@@ -346,6 +346,18 @@ export default index;
 "
 `;
 
+exports[`autoExternal(options) should handle enabling bundledDependencies 1`] = `
+"import foo from 'foo';
+import bar from 'bar';
+
+var baz = 'baz';
+
+var index = \`\${foo}\${bar}\${baz}\`;
+
+export default index;
+"
+`;
+
 exports[`autoExternal(options) should handle extending external array 1`] = `
 "import foo from 'foo';
 import bar from 'bar';
@@ -375,6 +387,21 @@ import bar from '@scope/bar';
 var baz = '@scope/baz';
 
 var index = \`\${foo}\${bar}\${baz}\`;
+
+export default index;
+"
+`;
+
+exports[`autoExternal(options) should not add bundledDependencies by default 1`] = `
+"var foo = 'foo';
+
+var bar = 'bar';
+
+var bar_1 = bar;
+
+var baz = 'baz';
+
+var index = \`\${foo}\${bar_1}\${baz}\`;
 
 export default index;
 "

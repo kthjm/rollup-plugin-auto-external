@@ -9,6 +9,7 @@ module.exports = ({
   dependencies = true,
   packagePath,
   peerDependencies = true,
+  bundledDependencies = false,
 } = {}) => ({
   name: 'auto-external',
   options(opts) {
@@ -16,7 +17,17 @@ module.exports = ({
     let ids = [];
 
     if (dependencies && pkg.dependencies) {
-      ids = ids.concat(Object.keys(pkg.dependencies));
+      ids = ids.concat(
+        bundledDependencies
+        ? Object.keys(pkg.dependencies)
+        : Object.keys(pkg.dependencies).filter(id => {
+          return pkg.dependencies[id] !== '*'
+        })
+      );
+    } else if (bundledDependencies && pkg.dependencies) {
+      ids = ids.concat(Object.keys(pkg.dependencies).filter(id => {
+        return pkg.dependencies[id] === '*'
+      }));
     }
 
     if (peerDependencies && pkg.peerDependencies) {
